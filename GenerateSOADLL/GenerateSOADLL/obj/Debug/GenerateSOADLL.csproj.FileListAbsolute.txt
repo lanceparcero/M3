@@ -82,3 +82,13 @@ E:\GIT REPOSITORIES\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\bin\Debug\GemBo
 E:\GIT REPOSITORIES\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\obj\Debug\GenerateSOADLL.csprojResolveAssemblyReference.cache
 E:\GIT REPOSITORIES\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\obj\Debug\GenerateSOADLL.dll
 E:\GIT REPOSITORIES\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\obj\Debug\GenerateSOADLL.pdb
+E:\GITHUB\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\bin\Debug\GenerateSOADLL.dll.config
+E:\GITHUB\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\bin\Debug\GenerateSOADLL.dll
+E:\GITHUB\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\bin\Debug\GenerateSOADLL.pdb
+E:\GITHUB\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\bin\Debug\EntityFramework.dll
+E:\GITHUB\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\bin\Debug\GemBox.Spreadsheet.dll
+E:\GITHUB\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\bin\Debug\EntityFramework.xml
+E:\GITHUB\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\bin\Debug\GemBox.Spreadsheet.xml
+E:\GITHUB\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\obj\Debug\GenerateSOADLL.csprojResolveAssemblyReference.cache
+E:\GITHUB\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\obj\Debug\GenerateSOADLL.dll
+E:\GITHUB\M3SOAGenerator\GenerateSOADLL\GenerateSOADLL\obj\Debug\GenerateSOADLL.pdb

@@ -35,6 +35,7 @@ namespace GenerateSOADLL.DataAccess
         public DbSet<m3_EmailRecipient> m3_EmailRecipient { get; set; }
         public DbSet<vw_MerchantFirstContact> vw_MerchantFirstContact { get; set; }
         public DbSet<m3_merchant> m3_merchant { get; set; }
+        public DbSet<m3_merchant_contact> m3_merchant_contact { get; set; }
     
         [EdmFunction("M3_PROEntities", "fn_SOADailyHeaders")]
         public virtual IQueryable<fn_SOADailyHeaders_Result> fn_SOADailyHeaders(Nullable<System.DateTime> sOADated)

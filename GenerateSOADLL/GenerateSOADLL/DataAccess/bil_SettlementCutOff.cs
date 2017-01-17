@@ -107,5 +107,21 @@ namespace GenerateSOADLL.DataAccess
         public bool SettlementMovementFlag { get; set; }
         public bool SOASendEmail { get; set; }
         public Nullable<long> EmailSenderID { get; set; }
+        public Nullable<int> account_bank { get; set; }
+        public string account_bank_branch_name { get; set; }
+        public string account_no { get; set; }
+        public string account_name { get; set; }
+        public string GIRO_merchantbankcode { get; set; }
+        public string GIRO_bankcode { get; set; }
+        public Nullable<bool> GIROEnabled { get; set; }
+        public Nullable<byte> GIROStatus { get; set; }
+        public Nullable<int> ADABankID { get; set; }
+        public string ADAReferenceNo { get; set; }
+        public string ADAmerchantbankcode { get; set; }
+        public Nullable<byte> ADAStatus { get; set; }
+        public Nullable<bool> ADAEnabled { get; set; }
+        public Nullable<int> CollectionBankID { get; set; }
+        public Nullable<decimal> CollectionBankADAFee { get; set; }
+        public string CollectionBankAccount { get; set; }
     }
 }

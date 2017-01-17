@@ -3,10 +3,18 @@
   <Profiles />
   <Settings>
     <Setting Name="Body" Type="System.String" Scope="Application">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">
+          &lt;p&gt;Dear Valued Customer,&lt;/p&gt;
+          &lt;p&gt;Please find attached the Statement of Account for your perusal.&lt;/p&gt;
+          &lt;p&gt;For further enquiries, please e-mail us at sales.eghl@ghl.com or contact us at +603-62865555.&lt;/p&gt;
+          &lt;p&gt;Thank you&lt;/p&gt;
+        </Value>
     </Setting>
     <Setting Name="Subject" Type="System.String" Scope="Application">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Daily Statement of Account</Value>
+    </Setting>
+    <Setting Name="MultipleRecipients" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

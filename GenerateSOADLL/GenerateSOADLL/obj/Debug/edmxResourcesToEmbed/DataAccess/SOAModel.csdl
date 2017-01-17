@@ -26,6 +26,11 @@
       <End Role="m3_merchant" EntitySet="m3_merchant" />
       <End Role="m3_EmailSender" EntitySet="m3_EmailSender" />
     </AssociationSet>
+    <EntitySet Name="m3_merchant_contact" EntityType="M3_PROModel.m3_merchant_contact" />
+    <AssociationSet Name="FK_m3_merchant_contact_m3_merchant" Association="M3_PROModel.FK_m3_merchant_contact_m3_merchant">
+      <End Role="m3_merchant" EntitySet="m3_merchant" />
+      <End Role="m3_merchant_contact" EntitySet="m3_merchant_contact" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="fn_SOADailyHeaders_Result">
     <Property Name="merchant_id" Type="Int32" Nullable="false" />
@@ -182,6 +187,22 @@
     <Property Type="Boolean" Name="SettlementMovementFlag" Nullable="false" />
     <Property Type="Boolean" Name="SOASendEmail" Nullable="false" />
     <Property Type="Int64" Name="EmailSenderID" />
+    <Property Type="Int32" Name="account_bank" />
+    <Property Type="String" Name="account_bank_branch_name" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="account_no" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="account_name" MaxLength="512" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="GIRO_merchantbankcode" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="GIRO_bankcode" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="GIROEnabled" />
+    <Property Type="Byte" Name="GIROStatus" />
+    <Property Type="Int32" Name="ADABankID" />
+    <Property Type="String" Name="ADAReferenceNo" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ADAmerchantbankcode" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="ADAStatus" />
+    <Property Type="Boolean" Name="ADAEnabled" />
+    <Property Type="Int32" Name="CollectionBankID" />
+    <Property Type="Decimal" Name="CollectionBankADAFee" Precision="18" Scale="2" />
+    <Property Type="String" Name="CollectionBankAccount" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="m3_EmailSender">
     <Key>
@@ -399,6 +420,9 @@
     <Property Type="String" Name="GIRO_merchantbankcode" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Type="String" Name="GIRO_bankcode" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="m3_EmailSender" Relationship="M3_PROModel.FK_m3_EmailSender_m3_merchant" FromRole="m3_merchant" ToRole="m3_EmailSender" />
+    <Property Type="Boolean" Name="GIROEnabled" />
+    <Property Type="Byte" Name="GIROStatus" />
+    <NavigationProperty Name="m3_merchant_contact" Relationship="M3_PROModel.FK_m3_merchant_contact_m3_merchant" FromRole="m3_merchant" ToRole="m3_merchant_contact" />
   </EntityType>
   <Association Name="FK_m3_EmailSender_m3_merchant">
     <End Type="M3_PROModel.m3_merchant" Role="m3_merchant" Multiplicity="0..1" />
@@ -408,6 +432,39 @@
         <PropertyRef Name="merchant_id" />
       </Principal>
       <Dependent Role="m3_EmailSender">
+        <PropertyRef Name="merchant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="m3_merchant_contact">
+    <Key>
+      <PropertyRef Name="SeqID" />
+    </Key>
+    <Property Type="Int64" Name="SeqID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="merchant_id" Nullable="false" />
+    <Property Type="String" Name="prefix" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="firstname" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="lastname" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="position" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="office_phone_no" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="mobile_phone_no" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="email" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="note" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="terminate_date" Precision="3" />
+    <Property Type="Int32" Name="audit_id" />
+    <Property Type="Int32" Name="UpdatedBy" />
+    <Property Type="DateTime" Name="LastUpdateDate" Precision="7" />
+    <Property Type="Boolean" Name="IsPrimary" />
+    <NavigationProperty Name="m3_merchant" Relationship="M3_PROModel.FK_m3_merchant_contact_m3_merchant" FromRole="m3_merchant_contact" ToRole="m3_merchant" />
+  </EntityType>
+  <Association Name="FK_m3_merchant_contact_m3_merchant">
+    <End Type="M3_PROModel.m3_merchant" Role="m3_merchant" Multiplicity="1" />
+    <End Type="M3_PROModel.m3_merchant_contact" Role="m3_merchant_contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="m3_merchant">
+        <PropertyRef Name="merchant_id" />
+      </Principal>
+      <Dependent Role="m3_merchant_contact">
         <PropertyRef Name="merchant_id" />
       </Dependent>
     </ReferentialConstraint>

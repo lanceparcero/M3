@@ -10,3 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Version Details
 - Excel Headers Updated. Chargeback/Refund was detached from Total Transactions to avoid confusion.
 
+## [5.1.0] - 12/21/2016
+### Version Details
+- Email Recipients now configurable to multiple or single contact. Can be changed in the app config(MultipleRecipients).
+

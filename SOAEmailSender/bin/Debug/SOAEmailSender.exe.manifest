@@ -78,36 +78,36 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GenerateSOADLL.dll" size="197120">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GenerateSOADLL.dll" size="211456">
       <assemblyIdentity name="GenerateSOADLL" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>38KrmkI+SPg5Va6fzIKjUP3AIi6SdcUyZFb6GXtF7EA=</dsig:DigestValue>
+        <dsig:DigestValue>3/ZNBRA3JbIJNOLzAEvNbPHHHCoj9qx8U61A6gh9Rwo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SOAEmailSender.exe" size="14848">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SOAEmailSender.exe" size="18432">
       <assemblyIdentity name="SOAEmailSender" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>QRLkOMo+hMMFwoOmQ9l9sJgi9fwMakPOMKtzE1x9QjQ=</dsig:DigestValue>
+        <dsig:DigestValue>zlkZMV5FJKqhAdvh0wAgCbZT95Ft4gozYzoj6i2Rt4Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="SOAEmailSender.exe.config" size="3850">
+  <file name="SOAEmailSender.exe.config" size="3961">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>TmmAeXqCQc9/OMsbtZJNHpOGzbvXvulHEZYzh97gt+w=</dsig:DigestValue>
+      <dsig:DigestValue>/drb9poilbgFVTbzqT+6Pn6SQh0x42zDroR2wnJtETM=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

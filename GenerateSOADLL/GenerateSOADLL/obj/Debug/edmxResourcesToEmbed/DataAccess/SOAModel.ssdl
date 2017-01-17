@@ -6,6 +6,7 @@
     <EntitySet Name="m3_EmailRecipient" EntityType="M3_PROModel.Store.m3_EmailRecipient" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="m3_EmailSender" EntityType="M3_PROModel.Store.m3_EmailSender" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="m3_merchant" EntityType="M3_PROModel.Store.m3_merchant" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="m3_merchant_contact" EntityType="M3_PROModel.Store.m3_merchant_contact" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="vw_MerchantFirstContact" EntityType="M3_PROModel.Store.vw_MerchantFirstContact" store:Type="Views" store:Schema="dbo" store:Name="vw_MerchantFirstContact">
       <DefiningQuery>SELECT 
       [vw_MerchantFirstContact].[merchant_id] AS [merchant_id], 
@@ -44,6 +45,10 @@
     <AssociationSet Name="FK_m3_EmailSender_m3_merchant" Association="M3_PROModel.Store.FK_m3_EmailSender_m3_merchant">
       <End Role="m3_merchant" EntitySet="m3_merchant" />
       <End Role="m3_EmailSender" EntitySet="m3_EmailSender" />
+    </AssociationSet>
+    <AssociationSet Name="FK_m3_merchant_contact_m3_merchant" Association="M3_PROModel.Store.FK_m3_merchant_contact_m3_merchant">
+      <End Role="m3_merchant" EntitySet="m3_merchant" />
+      <End Role="m3_merchant_contact" EntitySet="m3_merchant_contact" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="bil_SettlementCutOff">
@@ -143,6 +148,22 @@
     <Property Name="SettlementMovementFlag" Type="bit" Nullable="false" />
     <Property Name="SOASendEmail" Type="bit" Nullable="false" />
     <Property Name="EmailSenderID" Type="bigint" />
+    <Property Name="account_bank" Type="int" />
+    <Property Name="account_bank_branch_name" Type="varchar" MaxLength="128" />
+    <Property Name="account_no" Type="varchar" MaxLength="128" />
+    <Property Name="account_name" Type="varchar" MaxLength="512" />
+    <Property Name="GIRO_merchantbankcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="GIRO_bankcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="GIROEnabled" Type="bit" />
+    <Property Name="GIROStatus" Type="tinyint" />
+    <Property Name="ADABankID" Type="int" />
+    <Property Name="ADAReferenceNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="ADAmerchantbankcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="ADAStatus" Type="tinyint" />
+    <Property Name="ADAEnabled" Type="bit" />
+    <Property Name="CollectionBankID" Type="int" />
+    <Property Name="CollectionBankADAFee" Type="decimal" Scale="2" />
+    <Property Name="CollectionBankAccount" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="m3_EmailAttachment">
     <Key>
@@ -317,9 +338,31 @@
     <Property Name="DateMerchantSigned" Type="datetime" />
     <Property Name="GIRO_merchantbankcode" Type="nvarchar" MaxLength="100" />
     <Property Name="GIRO_bankcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="GIROEnabled" Type="bit" />
+    <Property Name="GIROStatus" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="m3_merchant_contact">
+    <Key>
+      <PropertyRef Name="SeqID" />
+    </Key>
+    <Property Name="SeqID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="merchant_id" Type="int" Nullable="false" />
+    <Property Name="prefix" Type="varchar" MaxLength="64" />
+    <Property Name="firstname" Type="varchar" MaxLength="128" />
+    <Property Name="lastname" Type="varchar" MaxLength="128" />
+    <Property Name="position" Type="varchar" MaxLength="128" />
+    <Property Name="office_phone_no" Type="varchar" MaxLength="64" />
+    <Property Name="mobile_phone_no" Type="varchar" MaxLength="64" />
+    <Property Name="email" Type="varchar" MaxLength="128" />
+    <Property Name="note" Type="varchar" MaxLength="1024" />
+    <Property Name="terminate_date" Type="datetime" />
+    <Property Name="audit_id" Type="int" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="LastUpdateDate" Type="datetime2" />
+    <Property Name="IsPrimary" Type="bit" />
   </EntityType>
   <!--Errors Found During Generation:
-      warning 6002: The table/view 'M3_DEV.dbo.vw_MerchantFirstContact' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'M3_PRO.dbo.vw_MerchantFirstContact' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
   <EntityType Name="vw_MerchantFirstContact">
     <Key>
@@ -335,7 +378,7 @@
     <Property Name="office_phone_no" Type="varchar" MaxLength="64" />
   </EntityType>
   <!--Errors Found During Generation:
-      warning 6002: The table/view 'M3_DEV.dbo.vw_SOADailyTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'M3_PRO.dbo.vw_SOADailyTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
   <EntityType Name="vw_SOADailyTransaction">
     <Key>
@@ -388,6 +431,18 @@
         <PropertyRef Name="merchant_id" />
       </Principal>
       <Dependent Role="m3_EmailSender">
+        <PropertyRef Name="merchant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_m3_merchant_contact_m3_merchant">
+    <End Role="m3_merchant" Type="M3_PROModel.Store.m3_merchant" Multiplicity="1" />
+    <End Role="m3_merchant_contact" Type="M3_PROModel.Store.m3_merchant_contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="m3_merchant">
+        <PropertyRef Name="merchant_id" />
+      </Principal>
+      <Dependent Role="m3_merchant_contact">
         <PropertyRef Name="merchant_id" />
       </Dependent>
     </ReferentialConstraint>

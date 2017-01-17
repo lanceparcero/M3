@@ -91,6 +91,9 @@
     <Compile Include="DataAccess\m3_merchant.cs">
       <DependentUpon>SOAModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\m3_merchant_contact.cs">
+      <DependentUpon>SOAModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess\SOAModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
