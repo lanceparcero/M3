@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GenerateSOADLL" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SerialNum" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">E43Y-7VXA-CT23-1MYG</Value>
+    </Setting>
+    <Setting Name="DestinationPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Users\lance parcero\Desktop\M3 v1.8\M3\M3\TemplateDir</Value>
+    </Setting>
+    <Setting Name="SourceFilePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\Users\lance parcero\Desktop\M3 v1.8\M3\M3\TemplateDir</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

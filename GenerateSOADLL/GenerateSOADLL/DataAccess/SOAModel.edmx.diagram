@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9944bddf57ef4108a15510c705038c3f" Name="Diagram1" >
+        <EntityTypeShape EntityType="M3_PROModel.vw_SOADailyTransaction" Width="1.5" PointX="5.4033262065627268" PointY="29.322067632024208" />
+        <EntityTypeShape EntityType="M3_PROModel.bil_SettlementCutOff" Width="1.5" PointX="6.7790247736401046" PointY="17.428849720130138" />
+        <EntityTypeShape EntityType="M3_PROModel.m3_EmailSender" Width="1.5" PointX="11.175616057205767" PointY="27.785957364265787" />
+        <EntityTypeShape EntityType="M3_PROModel.m3_EmailAttachment" Width="1.5" PointX="6.5084105145691007" PointY="13.195617607420132" />
+        <EntityTypeShape EntityType="M3_PROModel.m3_EmailRecipient" Width="1.5" PointX="10.759784442726422" PointY="29.494893922235303" />
+        <EntityTypeShape EntityType="M3_PROModel.vw_MerchantFirstContact" Width="1.5" PointX="4.2511983161099245" PointY="13.276694944722902" />
+        <AssociationConnector Association="M3_PROModel.FK_m3_EmailAttachment_m3_EmailSender" />
+        <AssociationConnector Association="M3_PROModel.FK_m3_EmailRecipient_m3_EmailSender" />
+        <EntityTypeShape EntityType="M3_PROModel.m3_merchant" Width="1.5" PointX="11.983883477739935" PointY="18.874657282081738" />
+        <AssociationConnector Association="M3_PROModel.FK_m3_EmailSender_m3_merchant" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

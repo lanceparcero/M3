@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="M3_PROModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="M3_PROEntities" p1:LazyLoadingEnabled="true">
+    <FunctionImport Name="fn_SOADailyHeaders" ReturnType="Collection(M3_PROModel.fn_SOADailyHeaders_Result)" IsComposable="true">
+      <Parameter Name="SOADated" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="fn_SOADailyWithheldTransactions" ReturnType="Collection(M3_PROModel.fn_SOADailyWithheldTransactions_Result)" IsComposable="true">
+      <Parameter Name="SOADated" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="vw_SOADailyTransaction" EntityType="M3_PROModel.vw_SOADailyTransaction" />
+    <EntitySet Name="bil_SettlementCutOff" EntityType="M3_PROModel.bil_SettlementCutOff" />
+    <EntitySet Name="m3_EmailSender" EntityType="M3_PROModel.m3_EmailSender" />
+    <EntitySet Name="m3_EmailAttachment" EntityType="M3_PROModel.m3_EmailAttachment" />
+    <EntitySet Name="m3_EmailRecipient" EntityType="M3_PROModel.m3_EmailRecipient" />
+    <EntitySet Name="vw_MerchantFirstContact" EntityType="M3_PROModel.vw_MerchantFirstContact" />
+    <AssociationSet Name="FK_m3_EmailAttachment_m3_EmailSender" Association="M3_PROModel.FK_m3_EmailAttachment_m3_EmailSender">
+      <End Role="m3_EmailSender" EntitySet="m3_EmailSender" />
+      <End Role="m3_EmailAttachment" EntitySet="m3_EmailAttachment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_m3_EmailRecipient_m3_EmailSender" Association="M3_PROModel.FK_m3_EmailRecipient_m3_EmailSender">
+      <End Role="m3_EmailSender" EntitySet="m3_EmailSender" />
+      <End Role="m3_EmailRecipient" EntitySet="m3_EmailRecipient" />
+    </AssociationSet>
+    <EntitySet Name="m3_merchant" EntityType="M3_PROModel.m3_merchant" />
+    <AssociationSet Name="FK_m3_EmailSender_m3_merchant" Association="M3_PROModel.FK_m3_EmailSender_m3_merchant">
+      <End Role="m3_merchant" EntitySet="m3_merchant" />
+      <End Role="m3_EmailSender" EntitySet="m3_EmailSender" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="fn_SOADailyHeaders_Result">
+    <Property Name="merchant_id" Type="Int32" Nullable="false" />
+    <Property Name="settlement_date" Type="DateTime" Nullable="false" />
+    <Property Name="registration_name" Type="String" MaxLength="512" Unicode="false" FixedLength="false" />
+    <Property Name="tax_id" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+    <Property Name="biz_address" Type="String" Nullable="false" MaxLength="3072" Unicode="false" FixedLength="false" />
+    <Property Name="biz_city" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+    <Property Name="CurrentBalance" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="TotalTransactions" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="TotalCBRF" Type="Decimal" Precision="21" Scale="4" />
+    <Property Name="TotalTransactionAdjustment" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="Others" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="AmountPaid" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="RemainingBalance" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="Fraud_NetAmount" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="firstname" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+    <Property Name="lastname" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+    <Property Name="email" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="AddressLine1" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="AddressLine2" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="AddressLine3" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="TaxID" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="BusinessRegistrationID" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="ContactNumber" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+  </ComplexType>
+  <ComplexType Name="fn_SOADailyWithheldTransactions_Result">
+    <Property Name="settlement_batch_id" Type="Int32" Nullable="false" />
+    <Property Name="merchant_id" Type="Int32" />
+    <Property Name="transaction_date" Type="DateTime" />
+    <Property Name="reconcile_tx_id" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="auth_code" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="tx_amount" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="computed_merchant_mdr_amount" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="computed_merchant_wht_amount" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="computed_pay_to_merchant_amount" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="settlement_date" Type="DateTime" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="vw_SOADailyTransaction">
+    <Key>
+      <PropertyRef Name="transactionid" />
+      <PropertyRef Name="transactiontype" />
+      <PropertyRef Name="country" />
+    </Key>
+    <Property Type="DateTime" Name="statementdate" Precision="0" />
+    <Property Type="Int32" Name="merchant_id" />
+    <Property Type="DateTime" Name="transactiondate" Precision="7" />
+    <Property Type="String" Name="transactionid" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="transactioncode" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="transactiontype" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="transactionamount" Precision="29" Scale="4" />
+    <Property Type="Decimal" Name="transactionMDR" Precision="29" Scale="4" />
+    <Property Type="Decimal" Name="transactionWHT" Precision="29" Scale="4" />
+    <Property Type="Decimal" Name="netamount" Precision="29" Scale="4" />
+    <Property Type="String" Name="country" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="productname" MaxLength="2048" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="bil_SettlementCutOff">
+    <Key>
+      <PropertyRef Name="SettlementCutOffID" />
+    </Key>
+    <Property Type="Int64" Name="SettlementCutOffID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="DateTime" Name="settlement_date" Nullable="false" Precision="0" />
+    <Property Type="Int32" Name="merchant_id" Nullable="false" />
+    <Property Type="Int32" Name="InternalCompanyID" Nullable="false" />
+    <Property Type="Int32" Name="CorporateID" Nullable="false" />
+    <Property Type="Int32" Name="AcquirerID" Nullable="false" />
+    <Property Type="Int32" Name="settlement_batch_id" Nullable="false" />
+    <Property Type="Decimal" Name="CurrentBalance" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_GrossAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_MerchantMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_MerchantVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_MerchantWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_MerchantMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_BankMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_BankVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_BankWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_BankMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_BankGrossAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_BankGrossAmountReceivableWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_BankNetAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Transaction_NetAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_GrossAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_MerchantMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_MerchantVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_MerchantWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_MerchantMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_BankMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_BankVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_BankWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_BankMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_BankGrossAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_BankGrossAmountReceivableWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_BankNetAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Chargeback_NetAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_GrossAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_MerchantMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_MerchantVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_MerchantWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_MerchantMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_BankMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_BankVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_BankWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_BankMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_BankGrossAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_BankGrossAmountReceivableWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_BankNetAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Refund_NetAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_GrossAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_MerchantMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_MerchantVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_MerchantWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_MerchantMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_BankMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_BankVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_BankWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_BankMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_BankGrossAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_BankGrossAmountReceivableWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_BankNetAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="TransactionAdjustment_NetAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="AdjustmentAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="AmountPaid" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="RemainingBalance" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_GrossAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_MerchantMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_MerchantVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_MerchantWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_MerchantMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_BankMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_BankVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_BankWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_BankMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_BankGrossAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_BankGrossAmountReceivableWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_BankNetAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="Fraud_NetAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_GrossAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_MerchantMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_MerchantVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_MerchantWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_MerchantMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_BankMDRAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_BankVATAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_BankWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_BankMDRWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_BankGrossAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_BankGrossAmountReceivableWHTAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_BankNetAmountReceivable" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="FraudRelease_NetAmount" Nullable="false" Precision="18" Scale="4" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="7" />
+    <Property Type="Boolean" Name="SettlementMovementFlag" Nullable="false" />
+    <Property Type="Boolean" Name="SOASendEmail" Nullable="false" />
+    <Property Type="Int64" Name="EmailSenderID" />
+  </EntityType>
+  <EntityType Name="m3_EmailSender">
+    <Key>
+      <PropertyRef Name="EmailSenderID" />
+    </Key>
+    <Property Type="Int64" Name="EmailSenderID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Subject" Nullable="false" MaxLength="450" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="RetryCount" Nullable="false" />
+    <Property Type="Byte" Name="Status" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="7" />
+    <Property Type="Int32" Name="CorporateID" />
+    <Property Type="Int32" Name="merchant_id" />
+    <Property Type="String" Name="LastRunError" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="LastRunDate" Precision="7" />
+    <NavigationProperty Name="m3_EmailAttachment" Relationship="M3_PROModel.FK_m3_EmailAttachment_m3_EmailSender" FromRole="m3_EmailSender" ToRole="m3_EmailAttachment" />
+    <NavigationProperty Name="m3_EmailRecipient" Relationship="M3_PROModel.FK_m3_EmailRecipient_m3_EmailSender" FromRole="m3_EmailSender" ToRole="m3_EmailRecipient" />
+    <NavigationProperty Name="m3_merchant" Relationship="M3_PROModel.FK_m3_EmailSender_m3_merchant" FromRole="m3_EmailSender" ToRole="m3_merchant" />
+  </EntityType>
+  <EntityType Name="m3_EmailAttachment">
+    <Key>
+      <PropertyRef Name="EmailAttachmentID" />
+    </Key>
+    <Property Type="Int64" Name="EmailAttachmentID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="EmailSenderID" Nullable="false" />
+    <Property Type="String" Name="FilePath" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="FilePathType" Nullable="false" />
+    <NavigationProperty Name="m3_EmailSender" Relationship="M3_PROModel.FK_m3_EmailAttachment_m3_EmailSender" FromRole="m3_EmailAttachment" ToRole="m3_EmailSender" />
+  </EntityType>
+  <EntityType Name="m3_EmailRecipient">
+    <Key>
+      <PropertyRef Name="EmailRecipientID" />
+    </Key>
+    <Property Type="Int64" Name="EmailRecipientID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="EmailSenderID" Nullable="false" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="RecipientType" Nullable="false" />
+    <NavigationProperty Name="m3_EmailSender" Relationship="M3_PROModel.FK_m3_EmailRecipient_m3_EmailSender" FromRole="m3_EmailRecipient" ToRole="m3_EmailSender" />
+  </EntityType>
+  <EntityType Name="vw_MerchantFirstContact">
+    <Key>
+      <PropertyRef Name="merchant_id" />
+      <PropertyRef Name="SeqID" />
+    </Key>
+    <Property Type="Int32" Name="merchant_id" Nullable="false" />
+    <Property Type="Int64" Name="SeqID" Nullable="false" />
+    <Property Type="String" Name="email" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="firstname" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="lastname" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="mobile_phone_no" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="office_phone_no" MaxLength="64" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_m3_EmailAttachment_m3_EmailSender">
+    <End Type="M3_PROModel.m3_EmailSender" Role="m3_EmailSender" Multiplicity="1" />
+    <End Type="M3_PROModel.m3_EmailAttachment" Role="m3_EmailAttachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="m3_EmailSender">
+        <PropertyRef Name="EmailSenderID" />
+      </Principal>
+      <Dependent Role="m3_EmailAttachment">
+        <PropertyRef Name="EmailSenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_m3_EmailRecipient_m3_EmailSender">
+    <End Type="M3_PROModel.m3_EmailSender" Role="m3_EmailSender" Multiplicity="1" />
+    <End Type="M3_PROModel.m3_EmailRecipient" Role="m3_EmailRecipient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="m3_EmailSender">
+        <PropertyRef Name="EmailSenderID" />
+      </Principal>
+      <Dependent Role="m3_EmailRecipient">
+        <PropertyRef Name="EmailSenderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="m3_merchant">
+    <Key>
+      <PropertyRef Name="merchant_id" />
+    </Key>
+    <Property Type="Int32" Name="merchant_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ghl_merchant_id" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="merchant_status" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="merchant_short_name" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="registration_id" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="registration_name" MaxLength="512" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="registration_date" Precision="3" />
+    <Property Type="String" Name="trading_name" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="merchant_category_code" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="tax_id" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="biz_address1" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="biz_address2" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="biz_address3" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="biz_city" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="biz_state" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="biz_zip" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="biz_country" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="mail_address_as_biz" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="mail_address1" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="mail_address2" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="mail_address3" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="mail_city" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="mail_state" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="mail_zip" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="mail_country" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="sales_code" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="sales_geo_distribution" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="max_tx_amount" Precision="18" Scale="4" />
+    <Property Type="Decimal" Name="max_expected_weekly_sales" Precision="18" Scale="4" />
+    <Property Type="Int32" Name="account_bank" />
+    <Property Type="String" Name="account_bank_branch_name" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="account_no" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="account_name" MaxLength="512" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="payment_method" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="update_status" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="update_description" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="update_by_user_id" />
+    <Property Type="String" Name="update_by_username" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="update_by_date" Precision="3" />
+    <Property Type="DateTime" Name="terminate_date" Precision="3" />
+    <Property Type="Int32" Name="audit_id" Nullable="false" />
+    <Property Type="Int32" Name="approve_by_user_id" />
+    <Property Type="String" Name="approve_by_username" MaxLength="64" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="approve_by_date" Precision="3" />
+    <Property Type="Int32" Name="approve_id" />
+    <Property Type="String" Name="actual_flag" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="OwnerID" />
+    <Property Type="Int32" Name="CorporateID" />
+    <Property Type="Int32" Name="CityID" />
+    <Property Type="Byte" Name="MerchantAccountType" />
+    <Property Type="Int32" Name="UpdatedBy" />
+    <Property Type="DateTime" Name="LastUpdateDate" Precision="7" />
+    <Property Type="Int32" Name="TemplateTMSID" />
+    <Property Type="String" Name="StoreCode" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="AcquirerID" />
+    <Property Type="Boolean" Name="InitialInstallation" />
+    <Property Type="String" Name="BranchID" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ZuelligCode" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PfizerCode" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="BrandID" />
+    <Property Type="Byte" Name="VendorID" />
+    <Property Type="Int32" Name="MSE" />
+    <Property Type="Int32" Name="MSO" />
+    <Property Type="Int32" Name="ReferredBy" />
+    <Property Type="Decimal" Name="MDR" Precision="18" Scale="2" />
+    <Property Type="String" Name="Remarks" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="MASE" />
+    <Property Type="Int32" Name="ISO" />
+    <Property Type="String" Name="ISA" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="RentalType" />
+    <Property Type="Int32" Name="MerchantCategory" />
+    <Property Type="String" Name="ADAReferenceNo" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="ApplicationType" />
+    <Property Type="String" Name="BankAccount" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="BankClarif" />
+    <Property Type="Byte" Name="BankReferral" />
+    <Property Type="Byte" Name="BankStatus" />
+    <Property Type="String" Name="BlitzName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="BusinessType" />
+    <Property Type="Boolean" Name="isFranchisee" />
+    <Property Type="Byte" Name="ContractStatus" />
+    <Property Type="Byte" Name="ContractTerm" />
+    <Property Type="DateTime" Name="DateAdminClarif" Precision="3" />
+    <Property Type="DateTime" Name="DateBankApproval" Precision="3" />
+    <Property Type="DateTime" Name="DateBankClarif" Precision="3" />
+    <Property Type="DateTime" Name="DateBankSubmission" Precision="3" />
+    <Property Type="DateTime" Name="DateCompletedDocs" Precision="3" />
+    <Property Type="String" Name="File201No" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="MSOSubmissionDate" Precision="3" />
+    <Property Type="DateTime" Name="ReleaseDateOrientationKit" Precision="3" />
+    <Property Type="DateTime" Name="ReturnDateOrientationKit" Precision="3" />
+    <Property Type="Boolean" Name="SalesBlitz" />
+    <Property Type="Byte" Name="SchemeType" />
+    <Property Type="DateTime" Name="DateDeclined" Precision="3" />
+    <Property Type="DateTime" Name="DateCallOutJointCall" Precision="3" />
+    <Property Type="String" Name="AMPGHLReferralCode" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="TypeOfCallReferral" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PersonInCharge" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DecisionMaker" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="AMPApprovalDate" Precision="3" />
+    <Property Type="Decimal" Name="ApprovedLoanAmount" Precision="18" Scale="2" />
+    <Property Type="Int64" Name="RegistrationID" />
+    <Property Type="Int32" Name="ReferredByMSE" />
+    <Property Type="Int32" Name="ReferredByMSO" />
+    <Property Type="Int32" Name="TeleSales" />
+    <Property Type="DateTime" Name="ContractTerminationDate" Precision="7" />
+    <Property Type="String" Name="Coordinates" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="DocumentScheme" />
+    <Property Type="DateTime" Name="MSESubmissionDate" Precision="7" />
+    <Property Type="Int32" Name="MSPRentalCutOff" />
+    <Property Type="Int32" Name="MSPQuotaCutOff" />
+    <Property Type="Int32" Name="MSPRentalBilling" />
+    <Property Type="Int32" Name="MSPQuotaBilling" />
+    <Property Type="Int32" Name="merchant_status_id" Nullable="false" />
+    <Property Type="Int32" Name="CreditTerms" />
+    <Property Type="Int32" Name="InternalCompanyID" Nullable="false" />
+    <Property Type="Boolean" Name="AutosendInvoice" />
+    <Property Type="Boolean" Name="AutosendReceipt" />
+    <Property Type="Decimal" Name="ADAMaxCap" Precision="18" Scale="2" />
+    <Property Type="Byte" Name="ADAFrequency" />
+    <Property Type="Int32" Name="CollectionBankID" />
+    <Property Type="String" Name="BankFindingsRemarks" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="CollectionBankAccount" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Decimal" Name="CollectionBankADAFee" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="ADABankID" />
+    <Property Type="Byte" Name="ADAStatus" />
+    <Property Type="String" Name="ADAmerchantbankcode" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="ADAEnabled" />
+    <Property Type="Boolean" Name="AutosendCreditNote" />
+    <Property Type="Boolean" Name="HighRiskIndustry" />
+    <Property Type="String" Name="RiskLevelClassification" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Type="Byte" Name="SettlementFrequency" />
+    <Property Type="String" Name="SettlementFrequencyValue1" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="DateMerchantSigned" Precision="3" />
+    <Property Type="String" Name="GIRO_merchantbankcode" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="GIRO_bankcode" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="m3_EmailSender" Relationship="M3_PROModel.FK_m3_EmailSender_m3_merchant" FromRole="m3_merchant" ToRole="m3_EmailSender" />
+  </EntityType>
+  <Association Name="FK_m3_EmailSender_m3_merchant">
+    <End Type="M3_PROModel.m3_merchant" Role="m3_merchant" Multiplicity="0..1" />
+    <End Type="M3_PROModel.m3_EmailSender" Role="m3_EmailSender" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="m3_merchant">
+        <PropertyRef Name="merchant_id" />
+      </Principal>
+      <Dependent Role="m3_EmailSender">
+        <PropertyRef Name="merchant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="M3_PROModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="M3_PROModelStoreContainer">
+    <EntitySet Name="bil_SettlementCutOff" EntityType="M3_PROModel.Store.bil_SettlementCutOff" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bil_SettlementFraud" EntityType="M3_PROModel.Store.bil_SettlementFraud" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="m3_merchant" EntityType="M3_PROModel.Store.m3_merchant" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="m3_merchant_contact" EntityType="M3_PROModel.Store.m3_merchant_contact" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tpa_settlement_batch" EntityType="M3_PROModel.Store.tpa_settlement_batch" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tpa_settlementtransaction" EntityType="M3_PROModel.Store.tpa_settlementtransaction" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tpa_SettlementTransactionStatus" EntityType="M3_PROModel.Store.tpa_SettlementTransactionStatus" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="vw_SOADailyTransaction" EntityType="M3_PROModel.Store.vw_SOADailyTransaction" store:Type="Views" store:Schema="dbo" store:Name="vw_SOADailyTransaction">
+      <DefiningQuery>SELECT 
+      [vw_SOADailyTransaction].[statementdate] AS [statementdate], 
+      [vw_SOADailyTransaction].[merchant_id] AS [merchant_id], 
+      [vw_SOADailyTransaction].[transactiondate] AS [transactiondate], 
+      [vw_SOADailyTransaction].[transactionid] AS [transactionid], 
+      [vw_SOADailyTransaction].[transactiontype] AS [transactiontype], 
+      [vw_SOADailyTransaction].[transactioncode] AS [transactioncode], 
+      [vw_SOADailyTransaction].[transactionamount] AS [transactionamount], 
+      [vw_SOADailyTransaction].[transactionMDR] AS [transactionMDR], 
+      [vw_SOADailyTransaction].[transactionWHT] AS [transactionWHT], 
+      [vw_SOADailyTransaction].[netamount] AS [netamount]
+      FROM [dbo].[vw_SOADailyTransaction] AS [vw_SOADailyTransaction]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_SOALastDayofMonthlyFraud" EntityType="M3_PROModel.Store.vw_SOALastDayofMonthlyFraud" store:Type="Views" store:Schema="dbo" store:Name="vw_SOALastDayofMonthlyFraud">
+      <DefiningQuery>SELECT 
+      [vw_SOALastDayofMonthlyFraud].[syear] AS [syear], 
+      [vw_SOALastDayofMonthlyFraud].[smonth] AS [smonth], 
+      [vw_SOALastDayofMonthlyFraud].[merchant_id] AS [merchant_id], 
+      [vw_SOALastDayofMonthlyFraud].[transaction_date] AS [transaction_date], 
+      [vw_SOALastDayofMonthlyFraud].[reconcile_tx_id] AS [reconcile_tx_id], 
+      [vw_SOALastDayofMonthlyFraud].[tx_amount] AS [tx_amount], 
+      [vw_SOALastDayofMonthlyFraud].[computed_merchant_mdr_amount] AS [computed_merchant_mdr_amount], 
+      [vw_SOALastDayofMonthlyFraud].[computed_merchant_wht_amount] AS [computed_merchant_wht_amount], 
+      [vw_SOALastDayofMonthlyFraud].[computed_pay_to_merchant_amount] AS [computed_pay_to_merchant_amount]
+      FROM [dbo].[vw_SOALastDayofMonthlyFraud] AS [vw_SOALastDayofMonthlyFraud]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_SOAMonthlyTransaction" EntityType="M3_PROModel.Store.vw_SOAMonthlyTransaction" store:Type="Views" store:Schema="dbo" store:Name="vw_SOAMonthlyTransaction">
+      <DefiningQuery>SELECT 
+      [vw_SOAMonthlyTransaction].[syear] AS [syear], 
+      [vw_SOAMonthlyTransaction].[smonth] AS [smonth], 
+      [vw_SOAMonthlyTransaction].[merchant_id] AS [merchant_id], 
+      [vw_SOAMonthlyTransaction].[monthCurrentBalance] AS [monthCurrentBalance], 
+      [vw_SOAMonthlyTransaction].[totalTransactionAmount] AS [totalTransactionAmount], 
+      [vw_SOAMonthlyTransaction].[totalChargebackAmount] AS [totalChargebackAmount], 
+      [vw_SOAMonthlyTransaction].[totalRefundAmount] AS [totalRefundAmount], 
+      [vw_SOAMonthlyTransaction].[totalAdjustmentAmount] AS [totalAdjustmentAmount], 
+      [vw_SOAMonthlyTransaction].[totalAmountPaid] AS [totalAmountPaid], 
+      [vw_SOAMonthlyTransaction].[monthRemainingBalance] AS [monthRemainingBalance]
+      FROM [dbo].[vw_SOAMonthlyTransaction] AS [vw_SOAMonthlyTransaction]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_m3_merchant_contact_m3_merchant" Association="M3_PROModel.Store.FK_m3_merchant_contact_m3_merchant">
+      <End Role="m3_merchant" EntitySet="m3_merchant" />
+      <End Role="m3_merchant_contact" EntitySet="m3_merchant_contact" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="bil_SettlementCutOff">
+    <Key>
+      <PropertyRef Name="SettlementCutOffID" />
+    </Key>
+    <Property Name="SettlementCutOffID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="settlement_date" Type="date" Nullable="false" />
+    <Property Name="merchant_id" Type="int" Nullable="false" />
+    <Property Name="InternalCompanyID" Type="int" Nullable="false" />
+    <Property Name="CorporateID" Type="int" Nullable="false" />
+    <Property Name="AcquirerID" Type="int" Nullable="false" />
+    <Property Name="settlement_batch_id" Type="int" Nullable="false" />
+    <Property Name="CurrentBalance" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Transaction_GrossAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Transaction_MerchantMDRAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Transaction_MerchantWHTAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Transaction_BankMDRAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Transaction_BankGrossAmountReceivable" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Transaction_BankWHTAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Transaction_BankNetAmountReceivable" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Transaction_NetAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Chargeback_GrossAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Chargeback_MerchantMDRAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Chargeback_MerchantWHTAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Chargeback_BankMDRAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Chargeback_BankGrossAmountReceivable" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Chargeback_BankWHTAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Chargeback_BankNetAmountReceivable" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Chargeback_NetAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Refund_GrossAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Refund_MerchantMDRAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Refund_MerchantWHTAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Refund_BankMDRAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Refund_BankGrossAmountReceivable" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Refund_BankWHTAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Refund_BankNetAmountReceivable" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Refund_NetAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="AdjustmentAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="AmountPaid" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="RemainingBalance" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Fraud_GrossAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Fraud_MerchantMDRAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Fraud_MerchantWHTAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Fraud_BankMDRAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Fraud_BankGrossAmountReceivable" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Fraud_BankWHTAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Fraud_BankNetAmountReceivable" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="Fraud_NetAmount" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bil_SettlementFraud">
+    <Key>
+      <PropertyRef Name="reconcile_tx_id" />
+    </Key>
+    <Property Name="reconcile_tx_id" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="SettlementCutOffID" Type="bigint" Nullable="false" />
+    <Property Name="settlement_batch_id" Type="int" />
+    <Property Name="transaction_date" Type="datetime2" />
+    <Property Name="tx_amount" Type="decimal" Scale="4" />
+    <Property Name="merchant_id" Type="int" />
+    <Property Name="MDRSchemeID" Type="int" />
+    <Property Name="merchant_mdr_percentage" Type="decimal" Scale="4" />
+    <Property Name="merchant_mdr_flat" Type="decimal" Scale="4" />
+    <Property Name="merchant_vat_rate" Type="decimal" Scale="4" />
+    <Property Name="merchant_wht_rate" Type="decimal" Scale="4" />
+    <Property Name="merchant_mdr_minimumrate" Type="decimal" Scale="4" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="bank_mdr_percentage" Type="decimal" Scale="4" />
+    <Property Name="bank_mdr_flat" Type="decimal" Scale="4" />
+    <Property Name="bank_vat_rate" Type="decimal" Scale="4" />
+    <Property Name="bank_wht_rate" Type="decimal" Scale="4" />
+    <Property Name="bank_mdr_minimumrate" Type="decimal" Scale="4" />
+    <Property Name="tx_create_date" Type="datetime2" />
+    <Property Name="override_merchant_mdr_amount" Type="decimal" Scale="4" />
+    <Property Name="override_merchant_mdr_percentage" Type="decimal" Scale="4" />
+    <Property Name="override_merchant_mdr_flat" Type="decimal" Scale="4" />
+    <Property Name="override_product_mdr_amount" Type="decimal" Scale="4" />
+    <Property Name="override_product_mdr_percentage" Type="decimal" Scale="4" />
+    <Property Name="override_product_mdr_flat" Type="decimal" Scale="4" />
+    <Property Name="AcquirerID" Type="int" />
+    <Property Name="MID" Type="varchar" MaxLength="64" />
+    <Property Name="TID" Type="varchar" MaxLength="64" />
+    <Property Name="card_pan" Type="nvarchar" MaxLength="50" />
+    <Property Name="account_no" Type="nvarchar" MaxLength="50" />
+    <Property Name="auth_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="pos_mode" Type="nvarchar" MaxLength="50" />
+    <Property Name="CurrencyCode" Type="nvarchar" MaxLength="25" />
+    <Property Name="card_scheme" Type="varchar" MaxLength="64" />
+    <Property Name="card_scheme_class" Type="varchar" MaxLength="64" />
+    <Property Name="ImportedDate" Type="datetime2" />
+    <Property Name="match_date" Type="datetime2" />
+    <Property Name="created_date" Type="datetime2" />
+    <Property Name="scheduledsettlement" Type="datetime2" />
+    <Property Name="computed_merchant_mdr_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_merchant_wht_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_pay_to_merchant_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_bank_mdr_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_gross_amount_receivable_from_bank" Type="decimal" Scale="4" />
+    <Property Name="computed_bank_wht_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_net_amount_receivable_from_bank" Type="decimal" Scale="4" />
+  </EntityType>
+  <EntityType Name="m3_merchant">
+    <Key>
+      <PropertyRef Name="merchant_id" />
+    </Key>
+    <Property Name="merchant_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ghl_merchant_id" Type="varchar" MaxLength="64" />
+    <Property Name="merchant_status" Type="varchar" MaxLength="64" />
+    <Property Name="merchant_short_name" Type="varchar" MaxLength="64" />
+    <Property Name="registration_id" Type="varchar" MaxLength="128" />
+    <Property Name="registration_name" Type="varchar" MaxLength="512" />
+    <Property Name="registration_date" Type="datetime" />
+    <Property Name="trading_name" Type="nvarchar" MaxLength="512" />
+    <Property Name="merchant_category_code" Type="varchar" MaxLength="64" />
+    <Property Name="tax_id" Type="varchar" MaxLength="128" />
+    <Property Name="biz_address1" Type="varchar" MaxLength="1024" />
+    <Property Name="biz_address2" Type="varchar" MaxLength="1024" />
+    <Property Name="biz_address3" Type="varchar" MaxLength="1024" />
+    <Property Name="biz_city" Type="varchar" MaxLength="128" />
+    <Property Name="biz_state" Type="varchar" MaxLength="128" />
+    <Property Name="biz_zip" Type="varchar" MaxLength="64" />
+    <Property Name="biz_country" Type="varchar" MaxLength="128" />
+    <Property Name="mail_address_as_biz" Type="varchar" MaxLength="1" />
+    <Property Name="mail_address1" Type="varchar" MaxLength="1024" />
+    <Property Name="mail_address2" Type="varchar" MaxLength="1024" />
+    <Property Name="mail_address3" Type="varchar" MaxLength="1024" />
+    <Property Name="mail_city" Type="varchar" MaxLength="128" />
+    <Property Name="mail_state" Type="varchar" MaxLength="128" />
+    <Property Name="mail_zip" Type="varchar" MaxLength="64" />
+    <Property Name="mail_country" Type="varchar" MaxLength="128" />
+    <Property Name="sales_code" Type="varchar" MaxLength="64" />
+    <Property Name="sales_geo_distribution" Type="varchar" MaxLength="128" />
+    <Property Name="max_tx_amount" Type="decimal" Scale="4" />
+    <Property Name="max_expected_weekly_sales" Type="decimal" Scale="4" />
+    <Property Name="account_bank" Type="int" />
+    <Property Name="account_bank_branch_name" Type="varchar" MaxLength="128" />
+    <Property Name="account_no" Type="varchar" MaxLength="128" />
+    <Property Name="account_name" Type="varchar" MaxLength="512" />
+    <Property Name="payment_method" Type="varchar" MaxLength="64" />
+    <Property Name="update_status" Type="varchar" MaxLength="64" />
+    <Property Name="update_description" Type="varchar" MaxLength="1024" />
+    <Property Name="update_by_user_id" Type="int" />
+    <Property Name="update_by_username" Type="varchar" MaxLength="64" />
+    <Property Name="update_by_date" Type="datetime" />
+    <Property Name="terminate_date" Type="datetime" />
+    <Property Name="audit_id" Type="int" Nullable="false" />
+    <Property Name="approve_by_user_id" Type="int" />
+    <Property Name="approve_by_username" Type="varchar" MaxLength="64" />
+    <Property Name="approve_by_date" Type="datetime" />
+    <Property Name="approve_id" Type="int" />
+    <Property Name="actual_flag" Type="varchar" MaxLength="1" />
+    <Property Name="OwnerID" Type="int" />
+    <Property Name="CorporateID" Type="int" />
+    <Property Name="CityID" Type="int" />
+    <Property Name="MerchantAccountType" Type="tinyint" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="LastUpdateDate" Type="datetime2" />
+    <Property Name="TemplateTMSID" Type="int" />
+    <Property Name="StoreCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="AcquirerID" Type="int" />
+    <Property Name="InitialInstallation" Type="bit" />
+    <Property Name="BranchID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ZuelligCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="PfizerCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="BrandID" Type="tinyint" />
+    <Property Name="VendorID" Type="tinyint" />
+    <Property Name="MSE" Type="int" />
+    <Property Name="MSO" Type="int" />
+    <Property Name="ReferredBy" Type="int" />
+    <Property Name="MDR" Type="decimal" Scale="2" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="MASE" Type="int" />
+    <Property Name="ISO" Type="int" />
+    <Property Name="ISA" Type="nvarchar" MaxLength="200" />
+    <Property Name="RentalType" Type="tinyint" />
+    <Property Name="MerchantCategory" Type="int" />
+    <Property Name="ADAReferenceNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApplicationType" Type="tinyint" />
+    <Property Name="BankAccount" Type="nvarchar" MaxLength="50" />
+    <Property Name="BankClarif" Type="bit" />
+    <Property Name="BankReferral" Type="tinyint" />
+    <Property Name="BankStatus" Type="tinyint" />
+    <Property Name="BlitzName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BusinessType" Type="tinyint" />
+    <Property Name="isFranchisee" Type="bit" />
+    <Property Name="ContractStatus" Type="tinyint" />
+    <Property Name="ContractTerm" Type="tinyint" />
+    <Property Name="DateAdminClarif" Type="datetime" />
+    <Property Name="DateBankApproval" Type="datetime" />
+    <Property Name="DateBankClarif" Type="datetime" />
+    <Property Name="DateBankSubmission" Type="datetime" />
+    <Property Name="DateCompletedDocs" Type="datetime" />
+    <Property Name="File201No" Type="nvarchar" MaxLength="50" />
+    <Property Name="MSOSubmissionDate" Type="datetime" />
+    <Property Name="ReleaseDateOrientationKit" Type="datetime" />
+    <Property Name="ReturnDateOrientationKit" Type="datetime" />
+    <Property Name="SalesBlitz" Type="bit" />
+    <Property Name="SchemeType" Type="tinyint" />
+    <Property Name="DateDeclined" Type="datetime" />
+    <Property Name="DateCallOutJointCall" Type="datetime" />
+    <Property Name="AMPGHLReferralCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="TypeOfCallReferral" Type="nvarchar" MaxLength="250" />
+    <Property Name="PersonInCharge" Type="nvarchar" MaxLength="150" />
+    <Property Name="DecisionMaker" Type="nvarchar" MaxLength="150" />
+    <Property Name="AMPApprovalDate" Type="datetime" />
+    <Property Name="ApprovedLoanAmount" Type="decimal" Scale="2" />
+    <Property Name="RegistrationID" Type="bigint" />
+    <Property Name="ReferredByMSE" Type="int" />
+    <Property Name="ReferredByMSO" Type="int" />
+    <Property Name="TeleSales" Type="int" />
+    <Property Name="ContractTerminationDate" Type="datetime2" />
+    <Property Name="Coordinates" Type="nvarchar" MaxLength="100" />
+    <Property Name="DocumentScheme" Type="tinyint" />
+    <Property Name="MSESubmissionDate" Type="datetime2" />
+    <Property Name="MSPRentalCutOff" Type="int" />
+    <Property Name="MSPQuotaCutOff" Type="int" />
+    <Property Name="MSPRentalBilling" Type="int" />
+    <Property Name="MSPQuotaBilling" Type="int" />
+    <Property Name="merchant_status_id" Type="int" Nullable="false" />
+    <Property Name="CreditTerms" Type="int" />
+    <Property Name="InternalCompanyID" Type="int" Nullable="false" />
+    <Property Name="AutosendInvoice" Type="bit" />
+    <Property Name="AutosendReceipt" Type="bit" />
+    <Property Name="ADAMaxCap" Type="decimal" Scale="2" />
+    <Property Name="ADAFrequency" Type="tinyint" />
+    <Property Name="CollectionBankID" Type="int" />
+    <Property Name="BankFindingsRemarks" Type="nvarchar(max)" />
+    <Property Name="CollectionBankAccount" Type="nvarchar" MaxLength="50" />
+    <Property Name="CollectionBankADAFee" Type="decimal" Scale="2" />
+    <Property Name="ADABankID" Type="int" />
+    <Property Name="ADAStatus" Type="tinyint" />
+    <Property Name="ADAmerchantbankcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="ADAEnabled" Type="bit" />
+    <Property Name="AutosendCreditNote" Type="bit" />
+    <Property Name="HighRiskIndustry" Type="bit" />
+    <Property Name="RiskLevelClassification" Type="nvarchar" MaxLength="2" />
+    <Property Name="SettlementFrequency" Type="tinyint" />
+    <Property Name="SettlementFrequencyValue1" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="m3_merchant_contact">
+    <Key>
+      <PropertyRef Name="SeqID" />
+    </Key>
+    <Property Name="SeqID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="merchant_id" Type="int" Nullable="false" />
+    <Property Name="prefix" Type="varchar" MaxLength="64" />
+    <Property Name="firstname" Type="varchar" MaxLength="128" />
+    <Property Name="lastname" Type="varchar" MaxLength="128" />
+    <Property Name="position" Type="varchar" MaxLength="128" />
+    <Property Name="office_phone_no" Type="varchar" MaxLength="64" />
+    <Property Name="mobile_phone_no" Type="varchar" MaxLength="64" />
+    <Property Name="email" Type="varchar" MaxLength="128" />
+    <Property Name="note" Type="varchar" MaxLength="1024" />
+    <Property Name="terminate_date" Type="datetime" />
+    <Property Name="audit_id" Type="int" />
+    <Property Name="UpdatedBy" Type="int" />
+    <Property Name="LastUpdateDate" Type="datetime2" />
+    <Property Name="IsPrimary" Type="bit" />
+  </EntityType>
+  <EntityType Name="tpa_settlement_batch">
+    <Key>
+      <PropertyRef Name="settlement_batch_id" />
+    </Key>
+    <Property Name="settlement_batch_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="settlement_date" Type="datetime" Nullable="false" />
+    <Property Name="reconcile_tx_count" Type="int" />
+    <Property Name="reconcile_tx_amount" Type="decimal" Scale="4" />
+    <Property Name="credit_refund_count" Type="int" />
+    <Property Name="credit_refund_amount" Type="decimal" Scale="4" />
+    <Property Name="charge_back_count" Type="int" />
+    <Property Name="charge_back_amount" Type="decimal" Scale="4" />
+  </EntityType>
+  <EntityType Name="tpa_settlementtransaction">
+    <Key>
+      <PropertyRef Name="reconcile_tx_id" />
+      <PropertyRef Name="transactiontype" />
+    </Key>
+    <Property Name="reconcile_tx_id" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="transactiontype" Type="tinyint" Nullable="false" />
+    <Property Name="settlement_batch_id" Type="int" />
+    <Property Name="transaction_date" Type="datetime2" />
+    <Property Name="tx_amount" Type="decimal" Scale="4" />
+    <Property Name="merchant_id" Type="int" />
+    <Property Name="MDRSchemeID" Type="int" />
+    <Property Name="merchant_mdr_percentage" Type="decimal" Scale="4" />
+    <Property Name="merchant_mdr_flat" Type="decimal" Scale="4" />
+    <Property Name="merchant_vat_rate" Type="decimal" Scale="4" />
+    <Property Name="merchant_wht_rate" Type="decimal" Scale="4" />
+    <Property Name="merchant_mdr_minimumrate" Type="decimal" Scale="4" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="bank_mdr_percentage" Type="decimal" Scale="4" />
+    <Property Name="bank_mdr_flat" Type="decimal" Scale="4" />
+    <Property Name="bank_vat_rate" Type="decimal" Scale="4" />
+    <Property Name="bank_wht_rate" Type="decimal" Scale="4" />
+    <Property Name="bank_mdr_minimumrate" Type="decimal" Scale="4" />
+    <Property Name="tx_create_date" Type="datetime2" />
+    <Property Name="override_merchant_mdr_amount" Type="decimal" Scale="4" />
+    <Property Name="override_merchant_mdr_percentage" Type="decimal" Scale="4" />
+    <Property Name="override_merchant_mdr_flat" Type="decimal" Scale="4" />
+    <Property Name="override_product_mdr_amount" Type="decimal" Scale="4" />
+    <Property Name="override_product_mdr_percentage" Type="decimal" Scale="4" />
+    <Property Name="override_product_mdr_flat" Type="decimal" Scale="4" />
+    <Property Name="AcquirerID" Type="int" />
+    <Property Name="MID" Type="varchar" MaxLength="64" />
+    <Property Name="TID" Type="varchar" MaxLength="64" />
+    <Property Name="card_pan" Type="nvarchar" MaxLength="50" />
+    <Property Name="account_no" Type="nvarchar" MaxLength="50" />
+    <Property Name="auth_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="pos_mode" Type="nvarchar" MaxLength="50" />
+    <Property Name="CurrencyCode" Type="nvarchar" MaxLength="25" />
+    <Property Name="card_scheme" Type="varchar" MaxLength="64" />
+    <Property Name="card_scheme_class" Type="varchar" MaxLength="64" />
+    <Property Name="ImportedDate" Type="datetime2" />
+    <Property Name="match_date" Type="datetime2" />
+    <Property Name="created_date" Type="datetime2" />
+    <Property Name="scheduledsettlement" Type="datetime2" />
+    <Property Name="computed_merchant_mdr_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_merchant_wht_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_pay_to_merchant_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_bank_mdr_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_gross_amount_receivable_from_bank" Type="decimal" Scale="4" />
+    <Property Name="computed_bank_wht_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_net_amount_receivable_from_bank" Type="decimal" Scale="4" />
+  </EntityType>
+  <EntityType Name="tpa_SettlementTransactionStatus">
+    <Key>
+      <PropertyRef Name="transactionstatusid" />
+    </Key>
+    <Property Name="transactionstatusid" Type="tinyint" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'M3_PRO.dbo.vw_SOADailyTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vw_SOADailyTransaction">
+    <Key>
+      <PropertyRef Name="transactionid" />
+      <PropertyRef Name="transactioncode" />
+    </Key>
+    <Property Name="statementdate" Type="date" />
+    <Property Name="merchant_id" Type="int" />
+    <Property Name="transactiondate" Type="datetime2" />
+    <Property Name="transactionid" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="transactiontype" Type="nvarchar" MaxLength="50" />
+    <Property Name="transactioncode" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="transactionamount" Type="decimal" Precision="29" Scale="4" />
+    <Property Name="transactionMDR" Type="decimal" Precision="29" Scale="4" />
+    <Property Name="transactionWHT" Type="decimal" Precision="29" Scale="4" />
+    <Property Name="netamount" Type="decimal" Precision="29" Scale="4" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'M3_PRO.dbo.vw_SOALastDayofMonthlyFraud' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vw_SOALastDayofMonthlyFraud">
+    <Key>
+      <PropertyRef Name="reconcile_tx_id" />
+    </Key>
+    <Property Name="syear" Type="int" />
+    <Property Name="smonth" Type="int" />
+    <Property Name="merchant_id" Type="int" />
+    <Property Name="transaction_date" Type="datetime2" />
+    <Property Name="reconcile_tx_id" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="tx_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_merchant_mdr_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_merchant_wht_amount" Type="decimal" Scale="4" />
+    <Property Name="computed_pay_to_merchant_amount" Type="decimal" Scale="4" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'M3_PRO.dbo.vw_SOAMonthlyTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="vw_SOAMonthlyTransaction">
+    <Key>
+      <PropertyRef Name="merchant_id" />
+      <PropertyRef Name="monthCurrentBalance" />
+      <PropertyRef Name="monthRemainingBalance" />
+    </Key>
+    <Property Name="syear" Type="int" />
+    <Property Name="smonth" Type="int" />
+    <Property Name="merchant_id" Type="int" Nullable="false" />
+    <Property Name="monthCurrentBalance" Type="decimal" Nullable="false" Scale="4" />
+    <Property Name="totalTransactionAmount" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="totalChargebackAmount" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="totalRefundAmount" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="totalAdjustmentAmount" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="totalAmountPaid" Type="decimal" Precision="38" Scale="4" />
+    <Property Name="monthRemainingBalance" Type="decimal" Nullable="false" Scale="4" />
+  </EntityType>
+  <Association Name="FK_m3_merchant_contact_m3_merchant">
+    <End Role="m3_merchant" Type="M3_PROModel.Store.m3_merchant" Multiplicity="1" />
+    <End Role="m3_merchant_contact" Type="M3_PROModel.Store.m3_merchant_contact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="m3_merchant">
+        <PropertyRef Name="merchant_id" />
+      </Principal>
+      <Dependent Role="m3_merchant_contact">
+        <PropertyRef Name="merchant_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
