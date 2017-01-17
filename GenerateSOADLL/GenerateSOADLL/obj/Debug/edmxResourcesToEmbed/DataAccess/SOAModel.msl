@@ -69,6 +69,22 @@
     <EntitySetMapping Name="bil_SettlementCutOff">
       <EntityTypeMapping TypeName="M3_PROModel.bil_SettlementCutOff">
         <MappingFragment StoreEntitySet="bil_SettlementCutOff">
+          <ScalarProperty Name="CollectionBankAccount" ColumnName="CollectionBankAccount" />
+          <ScalarProperty Name="CollectionBankADAFee" ColumnName="CollectionBankADAFee" />
+          <ScalarProperty Name="CollectionBankID" ColumnName="CollectionBankID" />
+          <ScalarProperty Name="ADAEnabled" ColumnName="ADAEnabled" />
+          <ScalarProperty Name="ADAStatus" ColumnName="ADAStatus" />
+          <ScalarProperty Name="ADAmerchantbankcode" ColumnName="ADAmerchantbankcode" />
+          <ScalarProperty Name="ADAReferenceNo" ColumnName="ADAReferenceNo" />
+          <ScalarProperty Name="ADABankID" ColumnName="ADABankID" />
+          <ScalarProperty Name="GIROStatus" ColumnName="GIROStatus" />
+          <ScalarProperty Name="GIROEnabled" ColumnName="GIROEnabled" />
+          <ScalarProperty Name="GIRO_bankcode" ColumnName="GIRO_bankcode" />
+          <ScalarProperty Name="GIRO_merchantbankcode" ColumnName="GIRO_merchantbankcode" />
+          <ScalarProperty Name="account_name" ColumnName="account_name" />
+          <ScalarProperty Name="account_no" ColumnName="account_no" />
+          <ScalarProperty Name="account_bank_branch_name" ColumnName="account_bank_branch_name" />
+          <ScalarProperty Name="account_bank" ColumnName="account_bank" />
           <ScalarProperty Name="EmailSenderID" ColumnName="EmailSenderID" />
           <ScalarProperty Name="SOASendEmail" ColumnName="SOASendEmail" />
           <ScalarProperty Name="SettlementMovementFlag" ColumnName="SettlementMovementFlag" />
@@ -217,6 +233,8 @@
     <EntitySetMapping Name="m3_merchant">
       <EntityTypeMapping TypeName="M3_PROModel.m3_merchant">
         <MappingFragment StoreEntitySet="m3_merchant">
+          <ScalarProperty Name="GIROStatus" ColumnName="GIROStatus" />
+          <ScalarProperty Name="GIROEnabled" ColumnName="GIROEnabled" />
           <ScalarProperty Name="GIRO_bankcode" ColumnName="GIRO_bankcode" />
           <ScalarProperty Name="GIRO_merchantbankcode" ColumnName="GIRO_merchantbankcode" />
           <ScalarProperty Name="DateMerchantSigned" ColumnName="DateMerchantSigned" />
@@ -353,6 +371,27 @@
           <ScalarProperty Name="merchant_status" ColumnName="merchant_status" />
           <ScalarProperty Name="ghl_merchant_id" ColumnName="ghl_merchant_id" />
           <ScalarProperty Name="merchant_id" ColumnName="merchant_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="m3_merchant_contact">
+      <EntityTypeMapping TypeName="M3_PROModel.m3_merchant_contact">
+        <MappingFragment StoreEntitySet="m3_merchant_contact">
+          <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+          <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="audit_id" ColumnName="audit_id" />
+          <ScalarProperty Name="terminate_date" ColumnName="terminate_date" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="mobile_phone_no" ColumnName="mobile_phone_no" />
+          <ScalarProperty Name="office_phone_no" ColumnName="office_phone_no" />
+          <ScalarProperty Name="position" ColumnName="position" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="prefix" ColumnName="prefix" />
+          <ScalarProperty Name="merchant_id" ColumnName="merchant_id" />
+          <ScalarProperty Name="SeqID" ColumnName="SeqID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

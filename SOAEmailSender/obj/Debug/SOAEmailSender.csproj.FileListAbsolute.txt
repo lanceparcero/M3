@@ -148,3 +148,20 @@ E:\GIT REPOSITORIES\M3SOAGenerator\SOAEmailSender\bin\Debug\GemBox.Spreadsheet.x
 E:\GIT REPOSITORIES\M3SOAGenerator\SOAEmailSender\obj\Debug\SOAEmailSender.csprojResolveAssemblyReference.cache
 E:\GIT REPOSITORIES\M3SOAGenerator\SOAEmailSender\obj\Debug\SOAEmailSender.exe.manifest
 E:\GIT REPOSITORIES\M3SOAGenerator\SOAEmailSender\obj\Debug\SOAEmailSender.application
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\SOAEmailSender.exe.config
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\obj\Debug\SOAEmailSender.exe
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\obj\Debug\SOAEmailSender.pdb
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\obj\Debug\SOAEmailSender.csprojResolveAssemblyReference.cache
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\SOAEmailSender.exe.manifest
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\SOAEmailSender.application
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\SOAEmailSender.exe
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\SOAEmailSender.pdb
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\EntityFramework.dll
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\GenerateSOADLL.dll
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\EPPlus.dll
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\GemBox.Spreadsheet.dll
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\GenerateSOADLL.pdb
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\EntityFramework.xml
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\bin\Debug\GemBox.Spreadsheet.xml
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\obj\Debug\SOAEmailSender.exe.manifest
+E:\GITHUB\M3SOAGenerator\SOAEmailSender\obj\Debug\SOAEmailSender.application

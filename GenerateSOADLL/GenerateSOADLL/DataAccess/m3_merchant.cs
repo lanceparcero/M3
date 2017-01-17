@@ -17,6 +17,7 @@ namespace GenerateSOADLL.DataAccess
         public m3_merchant()
         {
             this.m3_EmailSender = new HashSet<m3_EmailSender>();
+            this.m3_merchant_contact = new HashSet<m3_merchant_contact>();
         }
     
         public int merchant_id { get; set; }
@@ -155,7 +156,10 @@ namespace GenerateSOADLL.DataAccess
         public Nullable<System.DateTime> DateMerchantSigned { get; set; }
         public string GIRO_merchantbankcode { get; set; }
         public string GIRO_bankcode { get; set; }
+        public Nullable<bool> GIROEnabled { get; set; }
+        public Nullable<byte> GIROStatus { get; set; }
     
         public virtual ICollection<m3_EmailSender> m3_EmailSender { get; set; }
+        public virtual ICollection<m3_merchant_contact> m3_merchant_contact { get; set; }
     }
 }

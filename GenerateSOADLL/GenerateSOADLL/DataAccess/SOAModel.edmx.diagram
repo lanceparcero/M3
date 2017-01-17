@@ -15,6 +15,8 @@
         <AssociationConnector Association="M3_PROModel.FK_m3_EmailRecipient_m3_EmailSender" />
         <EntityTypeShape EntityType="M3_PROModel.m3_merchant" Width="1.5" PointX="11.983883477739935" PointY="18.874657282081738" />
         <AssociationConnector Association="M3_PROModel.FK_m3_EmailSender_m3_merchant" />
+        <EntityTypeShape EntityType="M3_PROModel.m3_merchant_contact" Width="1.5" PointX="2.0471629342283881" PointY="16.643042348624693" />
+        <AssociationConnector Association="M3_PROModel.FK_m3_merchant_contact_m3_merchant" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
